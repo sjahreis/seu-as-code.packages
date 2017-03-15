@@ -1,0 +1,26 @@
+plugins {
+    id 'de.undercouch.download' version '1.2'
+}
+
+apply plugin: 'maven-publish'
+
+import de.undercouch.gradle.tasks.download.Download
+
+task downloadArchive(type: Download) {
+    src "https://github.com/minishift/minishift/releases/download/v${project.version}/${project.name}-${project.version}-windows-amd64.zip"
+    dest buildDir
+}
+
+task extractArchive(type: Copy, dependsOn: downloadArchive) {
+    from { zipTree("$buildDir/${project.name}-${project.version}-windows-amd64.zip") }
+	  into "$buildDir/files/${project.name}-${project.version}"
+}
+
+task buildPackage(type: Jar, dependsOn: extractArchive) {
+    baseName project.name
+    version project.version
+    extension 'jar'
+    destinationDir buildDir
+    from "$buildDir/files"
+    from "files"
+}
