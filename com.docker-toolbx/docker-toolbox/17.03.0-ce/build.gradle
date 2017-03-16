@@ -1,0 +1,9 @@
+//Download and install of docker-toolbox is done in files\META-INF\hooks\downloadAndInstallDockerToolbox.groovy
+task buildPackage(type: Jar) {
+    baseName project.name
+    version project.version
+    extension 'jar'
+    destinationDir buildDir
+    from "$buildDir/files"
+    from "files"
+}
