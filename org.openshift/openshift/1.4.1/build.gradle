@@ -1,0 +1,24 @@
+plugins {
+    id 'de.undercouch.download' version '1.2'
+}
+
+import de.undercouch.gradle.tasks.download.Download
+
+task downloadArchive(type: Download) {
+	src "https://github.com/openshift/origin/releases/download/v${project.version}/openshift-origin-client-tools-v1.4.1-3f9807a-windows.zip"
+    dest buildDir
+}
+
+task extractArchive(type: Copy, dependsOn: downloadArchive) {
+    from { zipTree("$buildDir/openshift-origin-client-tools-v${project.version}-3f9807a-windows.zip") }
+	  into "$buildDir/files/${project.name}-${project.version}"
+}
+
+task buildPackage(type: Jar, dependsOn: extractArchive) {
+    baseName project.name
+    version project.version
+    extension 'jar'
+    destinationDir buildDir
+    from "$buildDir/files"
+    from "files"
+}
