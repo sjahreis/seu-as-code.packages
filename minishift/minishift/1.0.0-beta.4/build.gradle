@@ -2,8 +2,6 @@ plugins {
     id 'de.undercouch.download' version '1.2'
 }
 
-apply plugin: 'maven-publish'
-
 import de.undercouch.gradle.tasks.download.Download
 
 task downloadArchive(type: Download) {
