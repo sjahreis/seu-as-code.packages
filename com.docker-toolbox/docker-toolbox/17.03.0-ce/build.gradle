@@ -1,3 +1,5 @@
+apply plugin: 'maven-publish'
+
 //Download and install of docker-toolbox is done in files\META-INF\hooks\downloadAndInstallDockerToolbox.groovy
 task buildPackage(type: Jar) {
     baseName project.name
@@ -6,4 +8,23 @@ task buildPackage(type: Jar) {
     destinationDir buildDir
     from "$buildDir/files"
     from "files"
+}
+
+publishing {
+    publications {
+		docker(MavenPublication) {
+				artifact "${buildDir}/${project.name}-${version}.jar"
+		}
+    }
+
+	repositories {
+		// set the properties via -P to publish to your company repo
+		maven {
+			url = project.hasProperty('nexusUrl') ? project.nexusUrl : ''
+			credentials {
+				username = project.hasProperty('nexusUsername') ? project.nexusUsername : ''
+				password = project.hasProperty('nexusPassword') ? project.nexusPassword : ''
+			}
+		}
+    }
 }
