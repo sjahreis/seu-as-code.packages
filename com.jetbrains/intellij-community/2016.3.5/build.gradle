@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        mavenCentral()
+		maven { 
+			url 'https://dl.bintray.com/seu-as-code/maven'
+		}
+    }
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:2.0.0'
+    }
+}
+plugins {    
+    id 'de.qaware.seu.as.code.credentials' version '2.4.0'
+}
+apply plugin: 'base'
+apply plugin: 'maven-publish'
+import de.undercouch.gradle.tasks.download.Download
+
+
+
+task mkdirs << {
+    file("$tmpBuildDir/files/intellij-community-${version}").mkdirs()
+}
+
+task downloadArchive(type: Download, dependsOn: [mkdirs]) {
+    src "https://download.jetbrains.com/idea/ideaIC-${version}.exe"
+    dest tmpBuildDir
+}
+
+task extractArchive(type: Exec, dependsOn: [mkdirs , downloadArchive]) {
+    commandLine 'cmd', '/c', '7z.exe', 'x', "$tmpBuildDir/ideaIC-${version}.exe", "-o$tmpBuildDir/files/intellij-community-${version}"
+}
+
+task customize(type: Copy, dependsOn: extractArchive) {
+	from "files"
+	into "$tmpBuildDir/files"
+}
+
+task buildPackage(type: Jar, dependsOn: customize) {
+	baseName project.name
+	version version
+    classifier 'win'
+	extension 'jar'
+	destinationDir buildDir
+	from "$tmpBuildDir/files"
+}
+
+task cleanupTmp(type: Delete) {
+  delete "$tmpBuildDir"
+}
+
+buildPackage.finalizedBy cleanupTmp
+
+
+publishing {
+  publications {
+		intellij(MavenPublication) {
+			artifact buildPackage
+		}
+  }
+	repositories {
+		maven {
+			url = project.hasProperty('nexusUrl') ? project.nexusUrl : ''
+			credentials {	
+				if(project.credentials.get("nexus")!=null){
+					username = project.credentials.get('nexus').username
+					password = project.credentials.get('nexus').password
+				}
+				else {
+					username = project.hasProperty('nexusUsername') ? project.nexusUsername : ''
+					password = project.hasProperty('nexusPassword') ? project.nexusPassword : ''
+				} 					
+			}
+		}
+    }
+}
