@@ -1,13 +1,11 @@
 @echo off
 
-:: Add Minishift and the OpenShift CLI to the path
-set PATH=%SOFTWARE_DIR%\minishift-1.0.0-beta.4;%PATH%
-set PATH=%HOME%\.minishift\cache\oc\v1.4.1;%PATH%
-
-:: Correct the home variables which are used by Minishift
+:: Correct the home variables which are used by docker-toolbox
 set USERPROFILE=%HOME%
 set HOMEPATH=%HOME%
 set HOMEDRIVE=%SEU_HOME%
 
-set DOCKER_TOOLBOX_INSTALL_PATH=%SOFTWARE_DIR%
+set APPDATA=%HOME%/AppData/Roaming
+
 set MACHINE_STORAGE_PATH=%HOME%
+set DOCKER_TOOLBOX_INSTALL_PATH=%SOFTWARE_DIR%/DockerToolbox-17.03.0-ce
