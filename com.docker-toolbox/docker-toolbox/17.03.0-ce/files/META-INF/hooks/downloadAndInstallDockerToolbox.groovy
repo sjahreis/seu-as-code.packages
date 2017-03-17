@@ -1,5 +1,5 @@
 
-def file= "DockerToolbox-17.03.0-ce.exe"
+def file= "${seuLayout.temp}/DockerToolbox-17.03.0-ce.exe"
 def dlUrl = "https://github.com/docker/toolbox/releases/download/v17.03.0-ce/DockerToolbox-17.03.0-ce.exe"
 
 def installerFile = new File(file)
@@ -12,13 +12,17 @@ if( installerFile.exists() && installerFile.size() >0){
     installerFileOutStream.close()
 }
 
-// !!!!!!!! SET ENV:  DOCKER_TOOLBOX_INSTALL_PATH   cmd line arg '/DIR=<dir>' does NOT work
-// !!!!!!!! SET ENV:  MACHINE_STORAGE_PATH   AND/OR override  %USERPROFILE% and %HOME% ENV location
-println("installing..")
 
+println("installing ${file}..")
+
+def env = System.getenv().collect { k, v -> "$k=$v" }
+env.add("DOCKER_TOOLBOX_INSTALL_PATH=${seuLayout.software}")
+env.add("MACHINE_STORAGE_PATH=${seuLayout.home}")
+env.add("USERPROFILE=${seuLayout.home}")
+env.add("HOME=${seuLayout.home}")
 //Documentation http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline
 //DockerToolbox-1.11.2.exe /SILENT
 //DockerToolbox-1.11.2.exe /SILENT /COMPONENTS=docker,dockermachine,dockercompose
-def proc = "${file} /SILENT ".execute()
+def proc = "${file} /SILENT ".execute(env,new File(${seuLayout.home}) )
 proc.waitForProcessOutput(System.out, System.err)
-println("done")
+println("done installing")
