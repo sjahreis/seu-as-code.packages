@@ -22,6 +22,7 @@ This hook skript will download and install Docker-Toolbox fresh from a online se
 !The docker-toolbox installer taints the windows registry
   * HKEY_CURRENT_USER\Environment
     * DOCKER_TOOLBOX_INSTALL_PATH
+    
 and your ENV:
   * DOCKER_TOOLBOX_INSTALL_PATH
   * PATH
