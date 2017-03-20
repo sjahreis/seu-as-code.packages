@@ -8,7 +8,7 @@ def dlUrl = "https://github.com/docker/toolbox/releases/download/v17.03.0-ce/${d
 
 def installerFile = new File(installerPath)
 println("downloading ${installerPath} (~210Mb) from ${dlUrl} please be patient..")
-if ( installerFile.exists() && installerFile.size() >0) {
+if ( installerFile.exists() && installerFile.size() > 0) {
     println("Skip download of ${installerPath}. File already exists")
 } else {
     def installerFileOutStream=installerFile.newOutputStream();
