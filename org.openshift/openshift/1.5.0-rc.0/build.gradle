@@ -1,4 +1,5 @@
 plugins {
+    id 'de.undercouch.download' version '1.2'
     id 'de.qaware.seu.as.code.base' version '2.1.1'
     id 'de.qaware.seu.as.code.credentials' version '2.0.1'
 }
@@ -6,8 +7,19 @@ apply plugin: 'base'
 apply plugin: 'maven-publish'
 
 
-//Download and install of docker-toolbox is done in files\META-INF\hooks\downloadAndInstallDockerToolbox.groovy
-task buildPackage(type: Jar) {
+import de.undercouch.gradle.tasks.download.Download
+
+task downloadArchive(type: Download) {
+    src "https://github.com/openshift/origin/releases/download/v1.5.0-rc.0/openshift-origin-client-tools-v1.5.0-rc.0-49a4a7a-windows.zip"
+    dest buildDir
+}
+
+task extractArchive(type: Copy, dependsOn: downloadArchive) {
+    from { zipTree("$buildDir/openshift-origin-client-tools-v1.5.0-rc.0-49a4a7a-windows.zip") }
+    into "$buildDir/files/${project.name}-${project.version}"
+}
+
+task buildPackage(type: Jar, dependsOn: extractArchive) {
     baseName project.name
     version project.version
     extension 'jar'
@@ -16,9 +28,10 @@ task buildPackage(type: Jar) {
     from "files"
 }
 
+
 publishing {
     publications {
-          dockerToolbox(MavenPublication) {
+          openshift(MavenPublication) {
               artifact buildPackage
           }
     }
