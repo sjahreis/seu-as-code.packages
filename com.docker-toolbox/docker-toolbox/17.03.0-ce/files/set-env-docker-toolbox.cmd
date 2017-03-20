@@ -12,5 +12,3 @@ set DOCKER_TOOLBOX_INSTALL_PATH=%SOFTWARE_DIR%/DockerToolbox-17.03.0-ce
 set DOCKER_TOOLBOX_DOCKER_MACHINE_VB_VMNAME=defaultSEUDocker
 
 FOR /f "tokens=*" %%i IN ('docker-machine env %DOCKER_TOOLBOX_DOCKER_MACHINE_VB_VMNAME%') DO @%%i
-
-
