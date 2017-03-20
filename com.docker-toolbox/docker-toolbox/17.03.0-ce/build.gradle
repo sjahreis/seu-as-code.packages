@@ -1,3 +1,11 @@
+plugins {
+    id 'de.qaware.seu.as.code.base' version '2.1.1'
+    id 'de.qaware.seu.as.code.credentials' version '2.0.1'
+}
+apply plugin: 'base'
+apply plugin: 'maven-publish'
+
+apply plugin: 'base'
 apply plugin: 'maven-publish'
 
 //Download and install of docker-toolbox is done in files\META-INF\hooks\downloadAndInstallDockerToolbox.groovy
@@ -12,19 +20,23 @@ task buildPackage(type: Jar) {
 
 publishing {
     publications {
-		docker(MavenPublication) {
-				artifact "${buildDir}/${project.name}-${version}.jar"
-		}
+          dockerToolbox(MavenPublication) {
+              artifact buildPackage
+          }
     }
-
-	repositories {
-		// set the properties via -P to publish to your company repo
-		maven {
-			url = project.hasProperty('nexusUrl') ? project.nexusUrl : ''
-			credentials {
-				username = project.hasProperty('nexusUsername') ? project.nexusUsername : ''
-				password = project.hasProperty('nexusPassword') ? project.nexusPassword : ''
-			}
-		}
+    repositories {
+        maven {
+            url = project.hasProperty('nexusUrl') ? project.nexusUrl : ''
+            credentials {
+                if(project.credentials.get("nexus")!=null){
+                    username = project.credentials.get('nexus').username
+                    password = project.credentials.get('nexus').password
+                }
+                else {
+                    username = project.hasProperty('nexusUsername') ? project.nexusUsername : ''
+                    password = project.hasProperty('nexusPassword') ? project.nexusPassword : ''
+                }
+            }
+        }
     }
 }
