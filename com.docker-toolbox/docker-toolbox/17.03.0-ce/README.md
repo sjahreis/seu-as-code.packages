@@ -19,8 +19,10 @@ Instead it just contains an download&install groovy script in META-INF/hooks, wh
 This hook skript will download and install Docker-Toolbox fresh from a online server.
 
 ### Warning
-!The docker-toolbox installer taints the windows registry!
- * HKEY_CURRENT_USER\Environment
+!The docker-toolbox installer taints the windows registry
+  * HKEY_CURRENT_USER\Environment
+    * DOCKER_TOOLBOX_INSTALL_PATH
+and your ENV:
   * DOCKER_TOOLBOX_INSTALL_PATH
   * PATH
 
