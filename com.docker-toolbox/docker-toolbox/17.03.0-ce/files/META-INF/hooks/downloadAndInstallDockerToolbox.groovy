@@ -31,8 +31,14 @@ env.add("APPDATA=${seuLayout.home}/AppData/Roaming")
 //DockerToolbox-1.11.2.exe /SILENT
 //DockerToolbox-1.11.2.exe /SILENT /COMPONENTS="Docker,DockerMachine,DockerCompose"
 
+
+def components="Docker,DockerMachine,DockerCompose"
+if(System.getenv("VBOX_INSTALL_PATH")==null && System.getenv("VBOX_MSI_INSTALL_PATH")==null){
+  components=components + ",VirtualBox"
+}
+
 //For now run non-silent interactive installer! Docker Toolbox is too dumb to recognize an allready installed Virtualbox and will overwrite - even if a newer version is allready installed.
-"${installerPath} /DIR=${dockerToolboxInstallPath} /COMPONENTS=\"Docker,DockerMachine,DockerCompose\" ".execute(env, null).waitForProcessOutput(System.out, System.err)
+"${installerPath} /DIR=${dockerToolboxInstallPath} /COMPONENTS=\"${components}\" ".execute(env, null).waitForProcessOutput(System.out, System.err)
 
 //below installer command for future use if some day the docker-toolbox installer can figure out the virtualbox path and version.
 //"${installerPath} /SILENT /DIR=${dockerToolboxInstallPath} /COMPONENTS=\"Docker,DockerMachine,DockerCompose\" ".execute(env, null).waitForProcessOutput(System.out, System.err)
