@@ -1,7 +1,7 @@
-# SEU-as-code Packages for [Docker-Toolbox](https://www.docker.com/products/docker-toolbox)
+# SEU-as-code Package for [Docker-Toolbox 17.03.0-ce](https://github.com/docker/toolbox/releases/tag/v17.03.0-ce)
 
 Once installed this package might interfere with Docker-Toolbox installations allready present or installed in the future, even if the containing SEU is unmounted or deleted.
-Consider executing the Docker-Toolbox uninstaller before discarding the SEU
+Consider executing the Docker-Toolbox uninstaller before discarding the SEU.
 
 
 The package contains Docker-Toolbox 17.03.0-ce for Windows. 
@@ -12,8 +12,17 @@ dependencies {
 }
 ```
 
+### Contents
+This Docker-Toolbox version contains the following software:
+* docker 17.03.0-ce
+* docker-machine 0.10.0
+* docker-compose 1.11.2
+* Kitematic 0.13.1
+* Boot2Docker ISO 17.03.0-ce
+* VirtualBox 5.1.14
+
 ### Requirements
-Docker-Toolbox requires the following tools to be installed.
+Docker-Toolbox requires the following tools to be installed:
  * VirtualBox
  * Git
  
