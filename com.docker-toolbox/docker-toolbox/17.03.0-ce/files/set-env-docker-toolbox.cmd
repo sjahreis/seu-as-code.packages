@@ -10,7 +10,7 @@ set APPDATA=%HOME%/AppData/Roaming
 set MACHINE_STORAGE_PATH=%HOME%
 set DOCKER_TOOLBOX_INSTALL_PATH=%SOFTWARE_DIR%/DockerToolbox-17.03.0-ce
 
-set PATH="%DOCKER_TOOLBOX_INSTALL_PATH%;%PATH%"
+set PATH=%DOCKER_TOOLBOX_INSTALL_PATH%;%PATH%
 
 ::Defaults for new VirtualBox VM's
 ::https://docs.docker.com/machine/drivers/virtualbox/#usage
