@@ -16,6 +16,7 @@ dependencies {
 Docker-Toolbox requires the following tools to be installed.
  * VirtualBox
  * Git
+ 
 If not installed, you can enable the according checkboxes during the installation of Docker-Toolbox.
 Why not enabled by default: docker-toolbox's detection of VirtualBox is rudimentary and it would overwrite an existing VirtualBox version.
 
@@ -37,4 +38,4 @@ Contains the individual Gradle build projects for Docker-Toolbox for windows (ru
 This package "violates" the default SEU Packge behaviour, as there is no .zip version of docker-toolbox but just a installer .exe wich is rather big and intrusive into the system.
 Therefore this package does not! publish the docker-toolbox binary/installer files into the nexus within in the generated .jar. 
 Instead it just contains an download&install groovy script in META-INF/hooks, which will run during gradle tasks bootstrapSeu or updateSeu.
-This hook skript will download and install Docker-Toolbox fresh from a online server.
+This hook skript will download and install Docker-Toolbox fresh from an online server.
