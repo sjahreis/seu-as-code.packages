@@ -40,7 +40,7 @@ and your ENV:
   * DOCKER_TOOLBOX_INSTALL_PATH
   * PATH
 
-Deleting this package or SEU will not remove these fragments.
+Deleting this package or SEU will not remove these fragments. Please uninstall regular to remove the entries from the registry.
 
 ###  Disclaimer
 Contains the individual Gradle build projects for Docker-Toolbox for windows (runs docker inside VirtualBox - NOT Hypver-V).
