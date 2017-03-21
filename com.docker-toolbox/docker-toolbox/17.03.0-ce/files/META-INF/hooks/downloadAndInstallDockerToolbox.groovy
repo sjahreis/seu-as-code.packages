@@ -24,9 +24,16 @@ env.add("MACHINE_STORAGE_PATH=${seuLayout.home}")
 env.add("USERPROFILE=${seuLayout.home}")
 env.add("HOME=${seuLayout.home}")
 env.add("APPDATA=${seuLayout.home}/AppData/Roaming")
-//Documentation for docker toolbock installer http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline
-//DockerToolbox-1.11.2.exe /SILENT
-//DockerToolbox-1.11.2.exe /SILENT /COMPONENTS=docker,dockermachine,dockercompose
 
-"${installerPath} /SILENT /DIR=${dockerToolboxInstallPath}".execute(env, null).waitForProcessOutput(System.out, System.err)
+//Documentation for docker toolbock installer 
+//http://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline
+// https://github.com/docker/toolbox/blob/master/windows/Toolbox.iss
+//DockerToolbox-1.11.2.exe /SILENT
+//DockerToolbox-1.11.2.exe /SILENT /COMPONENTS="Docker,DockerMachine,DockerCompose"
+
+//For now run non-silent interactive installer! Docker Toolbox is too dumb to recognize an allready installed Virtualbox and will overwrite - even if a newer version is allready installed.
+"${installerPath} /DIR=${dockerToolboxInstallPath} /COMPONENTS=\"Docker,DockerMachine,DockerCompose\" ".execute(env, null).waitForProcessOutput(System.out, System.err)
+
+//below installer command for future use if some day the docker-toolbox installer can figure out the virtualbox path and version.
+//"${installerPath} /SILENT /DIR=${dockerToolboxInstallPath} /COMPONENTS=\"Docker,DockerMachine,DockerCompose\" ".execute(env, null).waitForProcessOutput(System.out, System.err)
 println("done installing")
