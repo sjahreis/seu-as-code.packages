@@ -8,7 +8,7 @@ The package contains Docker-Toolbox 17.03.0-ce for Windows.
 Install this package using SEU-as-code with the following dependency:
 ```groovy
 dependencies {
-		    software 'com.docker-toolbox:docker-toolbox:17.03.0-ce'
+    software 'com.docker-toolbox:docker-toolbox:17.03.0-ce'
 }
 ```
 
