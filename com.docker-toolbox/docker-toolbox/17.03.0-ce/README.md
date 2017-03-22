@@ -34,7 +34,7 @@ After you setup/updated your SEU, you have to manually execute the following com
 ```
 S:\software\initial-setup-docker-machine-vm.cmd
 ```
-Which will create and boot a new Docker VirtualBox image for OpenShift and install openshift into it.
+Which will create and boot a new Docker VirtualBox image.
 
 ### Warning
 !The docker-toolbox installer taints the windows registry
