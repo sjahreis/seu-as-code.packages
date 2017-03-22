@@ -29,7 +29,12 @@ Docker-Toolbox requires the following tools to be installed:
 If not installed, you can enable the according checkboxes during the installation of Docker-Toolbox.
 Why not enabled by default: docker-toolbox's detection of VirtualBox is rudimentary and it would overwrite an existing VirtualBox version.
 
-
+### SETUP
+After you setup/updated your SEU, you have to manually execute the following command ONCE: 
+```
+S:\software\initial-setup-docker-machine-vm.cmd
+```
+Which will create and boot a new Docker VirtualBox image for OpenShift and install openshift into it.
 
 ### Warning
 !The docker-toolbox installer taints the windows registry
