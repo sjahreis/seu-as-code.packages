@@ -1,4 +1,4 @@
-# SEU-as-code Packages for [Openshift](https://www.openshift.org/)
+# SEU-as-code Packages for [Openshift v1.4.1](https://www.openshift.org/)
 
 
 The package contains Openshift Origin 1.4.1. 
