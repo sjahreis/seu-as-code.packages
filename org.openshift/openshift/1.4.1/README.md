@@ -18,7 +18,7 @@ Openshift Origin 1.4.1 requires the following SEU-packages:
 ### SETUP
 After you setup/updated your SEU, you have to manually execute the following command ONCE: 
 ```
-S:\software\initialSetupOpenshiftAndDocker.cmd
+S:\software\initial-setup-openshift-and-docker.cmd
 ```
 Which will create and boot a new Docker VirtualBox image for OpenShift and install openshift into it.
 
