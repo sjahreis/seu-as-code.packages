@@ -11,6 +11,10 @@ dependencies {
 }
 ```
 
+### Requirements
+Openshift Origin 1.4.1 requires the following SEU-packages:
+ * [Docker-Toolbox 17.03.0-ce](https://github.com/docker/toolbox/releases/tag/v17.03.0-ce)
+
 ### SETUP
 After you setup/updated your SEU, you have to manually execute the following command ONCE: 
 ```
