@@ -1,4 +1,4 @@
-# SEU-as-code Packages for [Openshift](https://www.openshift.org/)
+# SEU-as-code Package for [Openshift 1.4.1](https://github.com/openshift/origin/releases/tag/v1.4.1)
 
 
 The package contains Openshift Origin 1.4.1. 
@@ -11,10 +11,14 @@ dependencies {
 }
 ```
 
+### Requirements
+Openshift Origin 1.4.1 requires the following SEU-as-code packages:
+ * [Docker-Toolbox 17.03.0-ce](https://github.com/docker/toolbox/releases/tag/v17.03.0-ce)
+
 ### SETUP
 After you setup/updated your SEU, you have to manually execute the following command ONCE: 
 ```
-S:\software\initialSetupOpenshiftAndDocker.cmd
+S:\software\initial-setup-openshift-and-docker.cmd
 ```
 Which will create and boot a new Docker VirtualBox image for OpenShift and install openshift into it.
 
