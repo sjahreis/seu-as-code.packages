@@ -3,9 +3,7 @@ plugins {
     id 'de.qaware.seu.as.code.base' version '2.1.1'
     id 'de.qaware.seu.as.code.credentials' version '2.0.1'
 }
-apply plugin: 'base'
 apply plugin: 'maven-publish'
-
 
 import de.undercouch.gradle.tasks.download.Download
 
@@ -27,7 +25,6 @@ task buildPackage(type: Jar, dependsOn: extractArchive) {
     from "$buildDir/files"
     from "files"
 }
-
 
 publishing {
     publications {

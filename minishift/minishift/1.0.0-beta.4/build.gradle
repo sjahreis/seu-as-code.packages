@@ -1,6 +1,8 @@
 plugins {
     id 'de.undercouch.download' version '1.2'
 }
+apply plugin: 'base'
+apply plugin: 'maven-publish'
 
 import de.undercouch.gradle.tasks.download.Download
 
@@ -21,4 +23,12 @@ task buildPackage(type: Jar, dependsOn: extractArchive) {
     destinationDir buildDir
     from "$buildDir/files"
     from "files"
+}
+
+publishing {
+    publications {
+          minishift(MavenPublication) {
+              artifact buildPackage
+          }
+    }
 }
